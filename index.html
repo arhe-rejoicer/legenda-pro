@@ -135,14 +135,35 @@
     .gallery{grid-template-columns:1fr}.gcard.big{grid-row:auto}
     form{border-left:none;border-top:1px solid var(--line)}.nav-right .nav-ph{display:none}
   }
-  @media(prefers-reduced-motion:reduce){.smoke,.hero-mono .glow,.marq-track{animation:none}.reveal{transition:none;opacity:1;transform:none}}
+  /* === доп. анимации (современный вау) === */
+  @keyframes shimmer{0%{background-position:0% 50%}100%{background-position:220% 50%}}
+  @keyframes shine{0%{left:-60%}55%,100%{left:150%}}
+  @keyframes kenburns{from{transform:scale(1)}to{transform:scale(1.09)}}
+  @keyframes ringspin{to{transform:rotate(360deg)}}
+  @keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+  @keyframes dust{0%{transform:translate(0,0);opacity:0}12%{opacity:.85}100%{transform:translate(18px,-180px);opacity:0}}
+  @keyframes scrolldown{0%,100%{transform:translateY(0);opacity:.35}50%{transform:translateY(9px);opacity:1}}
+  .metal{background-size:220% auto;animation:shimmer 5s linear infinite}
+  .btn{position:relative;overflow:hidden}
+  .btn::after{content:"";position:absolute;top:0;left:-60%;width:46%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.25),transparent);transform:skewX(-18deg);animation:shine 5s ease-in-out infinite;pointer-events:none}
+  .btn-w::after{background:linear-gradient(100deg,transparent,rgba(255,255,255,.55),transparent)}
+  .gcard img{animation:kenburns 18s ease-in-out infinite alternate}
+  .hero-mono .ring{position:absolute;width:380px;height:380px;border-radius:50%;background:conic-gradient(from 0deg,transparent,rgba(180,200,235,.3),transparent 55%);animation:ringspin 14s linear infinite;filter:blur(3px);z-index:-1}
+  .hero-logo{animation:floaty 7s ease-in-out infinite}
+  .dust{position:absolute;width:4px;height:4px;border-radius:50%;background:rgba(207,214,227,.75);filter:blur(.5px);pointer-events:none}
+  .scrolldn{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);width:24px;height:38px;border:1.5px solid var(--line);border-radius:14px;display:grid;justify-items:center;padding-top:7px;z-index:2}
+  .scrolldn i{width:4px;height:8px;border-radius:2px;background:var(--silver);animation:scrolldown 1.7s ease-in-out infinite}
+  .head h2{background:linear-gradient(180deg,#fff,#9aa2b2);-webkit-background-clip:text;background-clip:text;color:transparent}
+  .pcard,.stat{position:relative}
+  .pcard::before,.stat::before{content:"";position:absolute;inset:0;border-radius:16px;padding:1px;background:linear-gradient(130deg,transparent 35%,rgba(255,255,255,.3),transparent 65%);background-size:220% 220%;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:shimmer 8s linear infinite;opacity:.5;pointer-events:none}
+  @media(prefers-reduced-motion:reduce){.smoke,.hero-mono .glow,.marq-track,.metal,.btn::after,.gcard img,.hero-mono .ring,.hero-logo,.dust,.scrolldn i,.pcard::before,.stat::before{animation:none}.reveal{transition:none;opacity:1;transform:none}}
 </style>
 </head>
 <body>
 
 <header>
   <div class="wrap nav">
-    <a href="#" class="brand"><span class="lp">LP</span><span class="brandname"><b>Legenda</b> Pro<small>ПОТОЛОК</small></span></a>
+    <a href="#" class="brand"><img src="legenda-assets/logo.png" alt="Legenda Pro" style="height:52px;width:auto;border-radius:9px"></a>
     <nav class="nav-links"><a href="#works">Работы</a><a href="#prices">Цены</a><a href="#steps">Этапы</a><a href="#contacts">Контакты</a></nav>
     <div class="nav-right"><a class="nav-ph" href="tel:+79272434329">+7 (927) 243-43-29</a><a class="btn btn-w" href="#contacts">Рассчитать</a></div>
   </div>
@@ -150,6 +171,7 @@
 
 <section class="hero">
   <span class="smoke s1"></span><span class="smoke s2"></span><span class="smoke s3"></span>
+  <div class="scrolldn"><i></i></div>
   <div class="wrap hero-grid">
     <div>
       <div class="badge"><span class="st">★★★★★</span> <b>4.9</b> · 27 отзывов на Яндексе</div>
@@ -157,7 +179,13 @@
       <p class="lead">Натяжные потолки, парящие линии, трековый свет и теневые рассеиватели — под ключ. Бесплатный замер, монтаж по 6 точным шагам, рассрочка 0%.</p>
       <div class="hero-cta"><a class="btn btn-w" href="#contacts">Рассчитать потолок</a><a class="btn btn-o" href="tel:+79272434329">Позвонить</a></div>
     </div>
-    <div class="hero-mono"><div class="glow"></div><div class="big-lp">LP</div><div class="cap">LEGENDA PRO · КАЗАНЬ</div></div>
+    <div class="hero-mono"><div class="ring"></div><div class="glow"></div>
+      <img class="hero-logo" src="legenda-assets/logo.png" alt="Legenda Pro" style="width:320px;border-radius:22px;box-shadow:0 0 80px -14px rgba(180,200,235,.5)">
+      <span class="dust" style="left:22%;bottom:24%;animation:dust 6.5s ease-in infinite"></span>
+      <span class="dust" style="left:64%;bottom:30%;animation:dust 7.5s ease-in .8s infinite"></span>
+      <span class="dust" style="left:44%;bottom:18%;animation:dust 8s ease-in 1.6s infinite"></span>
+      <span class="dust" style="left:76%;bottom:22%;animation:dust 6s ease-in 2.3s infinite"></span>
+      <span class="dust" style="left:34%;bottom:34%;animation:dust 7s ease-in 3.1s infinite"></span></div>
   </div>
 </section>
 
