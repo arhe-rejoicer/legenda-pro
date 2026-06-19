@@ -300,7 +300,6 @@
   <div class="copy">© Legenda Pro · натяжные потолки и свет под ключ в Казани</div>
 </div></footer>
 
-<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
 <script>
 (function(){
   const SHOT=/[?&]shot/.test(location.search);
@@ -312,10 +311,8 @@
 
   if(SHOT){document.documentElement.classList.add('shot');document.querySelectorAll('.reveal').forEach(e=>e.classList.add('in'));return;}
 
-  try{const lenis=new Lenis({lerp:.09});function raf(t){lenis.raf(t);requestAnimationFrame(raf)}requestAnimationFrame(raf);
-    const par=[...document.querySelectorAll('[data-par]')];
-    lenis.on('scroll',({scroll})=>{par.forEach(el=>{el.style.transform='translate3d(0,'+(scroll*parseFloat(el.dataset.par))+'px,0)'})});
-  }catch(e){}
+  const par=[...document.querySelectorAll('[data-par]')];
+  if(par.length) addEventListener('scroll',()=>{const y=scrollY;par.forEach(el=>{el.style.transform='translate3d(0,'+(y*parseFloat(el.dataset.par))+'px,0)'})},{passive:true});
 
   if(matchMedia('(hover:hover)').matches){
     const cur=document.createElement('div');cur.className='cur';const dot=document.createElement('div');dot.className='curdot';document.body.append(cur,dot);
